@@ -2,8 +2,7 @@ package fluent
 
 import (
 	"github.com/Sirupsen/logrus"
-	// logrus_fluent "github.com/Sirupsen/logrus/hooks/fluent"
-	logrus_fluent "github.com/evalphobia/logrus/hooks/fluent"
+	"github.com/evalphobia/logrus_fluent"
 )
 
 // default logging hook level
