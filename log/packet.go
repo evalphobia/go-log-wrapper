@@ -10,10 +10,12 @@ import (
 type Packet struct {
 	Title   string
 	Data    interface{}
+	Err     error
 	Request *http.Request
 	SQL     string
 	Engine  string
 	Trace   int // stacktrace depth
+	NoTrace bool
 }
 
 // Fatal logs fatal error
@@ -50,9 +52,14 @@ func (p Packet) createField() logrus.Fields {
 			f["engine"] = p.Engine
 		}
 	}
-	traces := getTrace(p.Trace, 4)
-	if len(traces) != 0 {
-		f["trace"] = traces
+	if p.Err != nil {
+		f["error"] = p.Err
+	}
+	if !p.NoTrace {
+		traces := getTrace(p.Trace, 4)
+		if len(traces) != 0 {
+			f["trace"] = traces
+		}
 	}
 	return f
 }

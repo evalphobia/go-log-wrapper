@@ -77,3 +77,22 @@ func TestPacketCreateField(t *testing.T) {
 	assert.Equal(p.Title, f["message"])
 	assert.Equal(p.Data, f["value"])
 }
+
+func TestPacketNoTrace(t *testing.T) {
+	assert := assert.New(t)
+
+	var buf bytes.Buffer
+	logrus.SetOutput(&buf)
+
+	Packet{
+		Title:   "the title",
+		Data:    999,
+		NoTrace: true,
+	}.Error()
+	output := buf.String()
+	assert.Contains(output, `level=error`)
+	assert.Contains(output, `message="the title"`)
+	assert.Contains(output, `value=999`)
+	trace := getTrace(0, 2)
+	assert.NotContains(output, trace[0].Function)
+}
