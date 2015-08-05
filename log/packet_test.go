@@ -76,6 +76,11 @@ func TestPacketCreateField(t *testing.T) {
 
 	assert.Equal(p.Title, f["message"])
 	assert.Equal(p.Data, f["value"])
+
+	p.AddData("foo", "bar", 111)
+	f = p.createField()
+	assert.Equal(p.Title, f["message"])
+	assert.Equal([]interface{}{999, "foo", "bar", 111}, f["value"])
 }
 
 func TestPacketNoTrace(t *testing.T) {

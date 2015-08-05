@@ -29,6 +29,12 @@ func Error(v ...interface{}) {
 	logrus.WithFields(f).Error("error")
 }
 
+// Error logs warning
+func Warn(v ...interface{}) {
+	f := newLogField(v)
+	logrus.WithFields(f).Warn("warn")
+}
+
 // Info logs information
 func Info(v ...interface{}) {
 	f := newLogField(v)

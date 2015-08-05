@@ -67,6 +67,18 @@ func TestError(t *testing.T) {
 	assert.Contains(output, `value="message from me"`)
 }
 
+func TestWarn(t *testing.T) {
+	assert := assert.New(t)
+
+	var buf bytes.Buffer
+	logrus.SetOutput(&buf)
+
+	Warn("message from me")
+	output := buf.String()
+	assert.Contains(output, `level=warn`)
+	assert.Contains(output, `value="message from me"`)
+}
+
 func TestInfo(t *testing.T) {
 	assert := assert.New(t)
 
