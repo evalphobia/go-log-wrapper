@@ -17,7 +17,7 @@ type Packet struct {
 	Trace   int // stacktrace depth
 	NoTrace bool
 
-	data []interface{}
+	DataList []interface{}
 }
 
 // Fatal logs fatal error
@@ -51,15 +51,16 @@ func (p Packet) Debug() {
 }
 
 // AddData adds data for logging
-func (p *Packet) AddData(d ...interface{}) {
-	p.data = append(p.data, d...)
+func (p *Packet) AddData(d ...interface{}) *Packet {
+	p.DataList = append(p.DataList, d...)
+	return p
 }
 
 func (p Packet) createField() logrus.Fields {
 	f := logrus.Fields{}
 
 	f["message"] = p.Title
-	f["value"] = createLogValue(p.Data, p.data)
+	f["value"] = createLogValue(p.Data, p.DataList)
 
 	if p.Request != nil {
 		f["http_request"] = p.Request
