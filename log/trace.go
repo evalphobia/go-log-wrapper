@@ -1,14 +1,21 @@
 package log
 
 import (
+	"fmt"
+	"strings"
 	"runtime"
 )
 
 type StackTrace struct {
 	File     string
+	Module   string
 	Function string
 	Line     int
 	Path     string
+}
+
+func (s StackTrace) String() string {
+	return fmt.Sprintf("%s:%d %s.%s", s.File, s.Line, s.Module, s.Function)
 }
 
 func getTrace(depth, skip int) []StackTrace {
@@ -29,12 +36,14 @@ func trace(depth int) (StackTrace, bool) {
 	if !ok {
 		return StackTrace{}, false
 	}
+
 	trace := StackTrace{
 		File:     trimPath(file),
 		Line:     line,
 		Path:     file,
-		Function: getFunctionName(pt),
+
 	}
+	trace.Module, trace.Function = getFunctionName(pt)
 	return trace, true
 }
 
@@ -49,10 +58,17 @@ func trimPath(path string) string {
 	return trimed
 }
 
-func getFunctionName(pt uintptr) string {
+func getFunctionName(pt uintptr) (string, string) {
 	fn := runtime.FuncForPC(pt)
 	if fn == nil {
-		return ""
+		return "", ""
 	}
-	return fn.Name()
+	pack := ""
+	name := fn.Name()
+	if idx := strings.LastIndex(name, "."); idx != -1 {
+		pack = name[:idx]
+		name = name[idx+1:]
+	}
+	name = strings.Replace(name, "·", ".", -1)
+	return pack, name
 }

@@ -24,5 +24,6 @@ func AddLevel(level logrus.Level) {
 
 func Set(host string, port int) {
 	hook := logrus_fluent.NewHook(host, port)
+	hook.SetLevels(hookLevel)
 	logrus.AddHook(hook)
 }
