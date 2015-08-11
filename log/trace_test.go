@@ -11,15 +11,19 @@ func TestGetTrace(t *testing.T) {
 
 	trace := getTrace(0, 0)
 	assert.Equal(trace[0].File, "trace.go")
-	assert.Contains(trace[0].Function, "log-wrapper/log.trace")
+	assert.Contains(trace[0].Module, "go-log-wrapper/log")
+	assert.Contains(trace[0].Function, "trace")
 
 	trace = getTrace(0, 1)
 	assert.Equal(trace[0].File, "trace.go")
-	assert.Contains(trace[0].Function, "log-wrapper/log.getTrace")
+	assert.Contains(trace[0].Module, "go-log-wrapper/log")
+	assert.Contains(trace[0].Function, "getTrace")
 
 	trace = getTrace(0, 2)
 	assert.Equal(trace[0].File, "trace_test.go")
-	assert.Contains(trace[0].Function, "log-wrapper/log.TestGetTrace")
+	assert.Contains(trace[0].Module, "go-log-wrapper/log")
+	assert.Contains(trace[0].Function, "TestGetTrace")
+
 }
 
 func TestTrace(t *testing.T) {
@@ -27,9 +31,11 @@ func TestTrace(t *testing.T) {
 
 	tc, _ := trace(0)
 	assert.Equal(tc.File, "trace.go")
-	assert.Contains(tc.Function, "log-wrapper/log.trace")
+	assert.Contains(tc.Module, "go-log-wrapper/log")
+	assert.Contains(tc.Function, "trace")
 
 	tc, _ = trace(1)
 	assert.Equal(tc.File, "trace_test.go")
-	assert.Contains(tc.Function, "log-wrapper/log.TestTrace")
+	assert.Contains(tc.Module, "go-log-wrapper/log")
+	assert.Contains(tc.Function, "TestTrace")
 }

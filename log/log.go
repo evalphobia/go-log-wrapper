@@ -66,3 +66,13 @@ func Header(v ...interface{}) {
 	fmt.Printf("===================== %v =====================\n", v[0])
 	return
 }
+
+// Mark prints trace info in console
+func Mark(i ...int) {
+	depth := 2
+	if len(i) > 0 {
+		depth = i[0]
+	}
+	v, _ := trace(depth)
+	Header(v)
+}

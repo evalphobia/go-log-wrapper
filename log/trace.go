@@ -2,8 +2,8 @@ package log
 
 import (
 	"fmt"
-	"strings"
 	"runtime"
+	"strings"
 )
 
 type StackTrace struct {
@@ -38,10 +38,9 @@ func trace(depth int) (StackTrace, bool) {
 	}
 
 	trace := StackTrace{
-		File:     trimPath(file),
-		Line:     line,
-		Path:     file,
-
+		File: trimPath(file),
+		Line: line,
+		Path: file,
 	}
 	trace.Module, trace.Function = getFunctionName(pt)
 	return trace, true
