@@ -6,20 +6,20 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetTrace(t *testing.T) {
+func TestGetTraces(t *testing.T) {
 	assert := assert.New(t)
 
-	trace := getTrace(0, 0)
+	trace := GetTraces(0, 0)
 	assert.Equal(trace[0].File, "trace.go")
 	assert.Contains(trace[0].Module, "go-log-wrapper/log")
-	assert.Contains(trace[0].Function, "trace")
+	assert.Contains(trace[0].Function, "Trace")
 
-	trace = getTrace(0, 1)
+	trace = GetTraces(0, 1)
 	assert.Equal(trace[0].File, "trace.go")
 	assert.Contains(trace[0].Module, "go-log-wrapper/log")
-	assert.Contains(trace[0].Function, "getTrace")
+	assert.Contains(trace[0].Function, "GetTraces")
 
-	trace = getTrace(0, 2)
+	trace = GetTraces(0, 2)
 	assert.Equal(trace[0].File, "trace_test.go")
 	assert.Contains(trace[0].Module, "go-log-wrapper/log")
 	assert.Contains(trace[0].Function, "TestGetTrace")
@@ -29,12 +29,12 @@ func TestGetTrace(t *testing.T) {
 func TestTrace(t *testing.T) {
 	assert := assert.New(t)
 
-	tc, _ := trace(0)
+	tc, _ := Trace(0)
 	assert.Equal(tc.File, "trace.go")
 	assert.Contains(tc.Module, "go-log-wrapper/log")
-	assert.Contains(tc.Function, "trace")
+	assert.Contains(tc.Function, "Trace")
 
-	tc, _ = trace(1)
+	tc, _ = Trace(1)
 	assert.Equal(tc.File, "trace_test.go")
 	assert.Contains(tc.Module, "go-log-wrapper/log")
 	assert.Contains(tc.Function, "TestTrace")

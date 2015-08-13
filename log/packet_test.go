@@ -22,7 +22,7 @@ func TestPacketError(t *testing.T) {
 	assert.Contains(output, `level=error`)
 	assert.Contains(output, `message="the title"`)
 	assert.Contains(output, `value=999`)
-	trace := getTrace(0, 2)
+	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
 }
 
@@ -40,7 +40,7 @@ func TestPacketInfo(t *testing.T) {
 	assert.Contains(output, `level=info`)
 	assert.Contains(output, `message="the title"`)
 	assert.Contains(output, `value=999`)
-	trace := getTrace(0, 2)
+	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
 }
 
@@ -58,7 +58,7 @@ func TestPacketDebug(t *testing.T) {
 	assert.Contains(output, `level=debug`)
 	assert.Contains(output, `message="the title"`)
 	assert.Contains(output, `value=999`)
-	trace := getTrace(0, 2)
+	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
 }
 
@@ -98,6 +98,6 @@ func TestPacketNoTrace(t *testing.T) {
 	assert.Contains(output, `level=error`)
 	assert.Contains(output, `message="the title"`)
 	assert.Contains(output, `value=999`)
-	trace := getTrace(0, 2)
+	trace := GetTraces(0, 2)
 	assert.NotContains(output, trace[0].Function)
 }
