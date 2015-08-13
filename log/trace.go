@@ -18,20 +18,20 @@ func (s StackTrace) String() string {
 	return fmt.Sprintf("%s:%d %s.%s", s.File, s.Line, s.Module, s.Function)
 }
 
-func getTrace(depth, skip int) []StackTrace {
+func GetTraces(depth, skip int) []StackTrace {
 	depth++
 	var traces []StackTrace
 	for i := 0; i < depth; i++ {
-		st, ok := trace(skip + i)
+		st, ok := Trace(skip + i)
 		if !ok {
-			continue
+			break
 		}
 		traces = append(traces, st)
 	}
 	return traces
 }
 
-func trace(depth int) (StackTrace, bool) {
+func Trace(depth int) (StackTrace, bool) {
 	pt, file, line, ok := runtime.Caller(depth)
 	if !ok {
 		return StackTrace{}, false

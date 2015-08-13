@@ -6,6 +6,11 @@ import (
 	"github.com/Sirupsen/logrus"
 )
 
+const (
+	defaultTraceDepth = 10
+	defaultSkipDepth  = 4
+)
+
 // Packet is struct for log data
 type Packet struct {
 	Title   string
@@ -14,8 +19,11 @@ type Packet struct {
 	Request *http.Request
 	SQL     string
 	Engine  string
-	Trace   int // stacktrace depth
-	NoTrace bool
+
+	Trace     int // stacktrace depth
+	TraceSkip int
+	TraceData interface{}
+	NoTrace   bool
 
 	DataList []interface{}
 }
@@ -74,11 +82,26 @@ func (p Packet) createField() logrus.Fields {
 	if p.Err != nil {
 		f["error"] = p.Err
 	}
-	if !p.NoTrace {
-		traces := getTrace(p.Trace, 4)
-		if len(traces) != 0 {
-			f["trace"] = traces
-		}
+
+	switch {
+	case p.NoTrace:
+		return f
+	case p.TraceData != nil:
+		f["trace"] = p.TraceData
+		return f
+	}
+
+	// assign default value
+	if p.Trace == 0 {
+		p.Trace = defaultTraceDepth
+	}
+	if p.TraceSkip == 0 {
+		p.TraceSkip = defaultSkipDepth
+	}
+
+	traces := GetTraces(p.Trace, p.TraceSkip)
+	if len(traces) != 0 {
+		f["trace"] = traces
 	}
 	return f
 }

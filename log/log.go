@@ -12,7 +12,7 @@ var Nothing int
 
 func newLogField(v []interface{}) logrus.Fields {
 	f := logrus.Fields{}
-	f["trace"] = getTrace(0, 3)
+	f["trace"] = GetTraces(0, 3)
 
 	if len(v) > 1 {
 		f["message"] = v[0].(string)
@@ -73,6 +73,6 @@ func Mark(i ...int) {
 	if len(i) > 0 {
 		depth = i[0]
 	}
-	v, _ := trace(depth)
+	v, _ := Trace(depth)
 	Header(v)
 }
