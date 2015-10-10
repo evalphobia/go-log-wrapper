@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/Sirupsen/logrus/hooks/sentry"
+	"github.com/evalphobia/logrus_sentry"
 )
 
 // default timeout
