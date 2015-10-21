@@ -19,6 +19,7 @@ type Packet struct {
 	Request *http.Request
 	SQL     string
 	Engine  string
+	Tag     string
 
 	Trace     int // stacktrace depth
 	TraceSkip int
@@ -67,7 +68,7 @@ func (p *Packet) AddData(d ...interface{}) *Packet {
 func (p Packet) createField() logrus.Fields {
 	f := logrus.Fields{}
 
-	f["message"] = p.Title
+	f["tag"] = p.Tag
 	f["value"] = createLogValue(p.Data, p.DataList)
 
 	if p.Request != nil {
