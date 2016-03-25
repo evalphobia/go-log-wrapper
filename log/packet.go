@@ -19,6 +19,7 @@ type Packet struct {
 	Request *http.Request
 	SQL     string
 	Engine  string
+	UserID  string
 	Tag     string
 
 	Trace     int // stacktrace depth
@@ -80,6 +81,10 @@ func (p Packet) createField() logrus.Fields {
 			f["engine"] = p.Engine
 		}
 	}
+	if p.UserID != "" {
+		f["user_id"] = p.UserID
+	}
+
 	if p.Err != nil {
 		f["error"] = p.Err
 	}
