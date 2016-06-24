@@ -1,7 +1,8 @@
 go-log-wrapper
 ====
 
-[![Build Status](https://drone.io/github.com/evalphobia/go-log-wrapper/status.png)](https://drone.io/github.com/evalphobia/go-log-wrapper/latest)  [![Coverage Status](https://coveralls.io/repos/evalphobia/go-log-wrapper/badge.svg?branch=master&service=github)](https://coveralls.io/github/evalphobia/go-log-wrapper?branch=master)
+[![Build Status](https://travis-ci.org/evalphobia/go-log-wrapper.svg?branch=master)](https://travis-ci.org/evalphobia/go-log-wrapper) [![codecov](https://codecov.io/gh/evalphobia/go-log-wrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/evalphobia/go-log-wrapper)
+ [![GoDoc](https://godoc.org/github.com/evalphobia/go-log-wrapper?status.svg)](https://godoc.org/github.com/evalphobia/go-log-wrapper)
 
 simple logrus wrapper to use easily
 
