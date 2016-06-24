@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Sirupsen/logrus"
+	"golang.org/x/net/context"
 )
 
 const (
@@ -17,6 +18,7 @@ type Packet struct {
 	Data    interface{}
 	Err     error
 	Request *http.Request
+	Context context.Context
 	SQL     string
 	Engine  string
 	UserID  string
@@ -74,6 +76,9 @@ func (p Packet) createField() logrus.Fields {
 
 	if p.Request != nil {
 		f["http_request"] = p.Request
+	}
+	if p.Context != nil {
+		f["context"] = p.Context
 	}
 	if p.SQL != "" {
 		f["query"] = p.SQL
