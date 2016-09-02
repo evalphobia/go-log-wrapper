@@ -34,5 +34,6 @@ func Set(dsn string) {
 		return
 	}
 	hook.Timeout = timeout
+	hook.AddIgnore("context")
 	logrus.AddHook(hook)
 }
