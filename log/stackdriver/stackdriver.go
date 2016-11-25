@@ -4,19 +4,35 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/evalphobia/google-api-go-wrapper/config"
 	"github.com/evalphobia/logrus_stackdriver"
+
+	"github.com/evalphobia/go-log-wrapper/log"
 )
 
 // default logging hook level
-var hookLevel = []logrus.Level{
-	logrus.PanicLevel,
-	logrus.FatalLevel,
-	logrus.ErrorLevel,
-	logrus.WarnLevel,
-	logrus.InfoLevel,
-}
+var hookLevel = log.LevelsInfo
 
 func SetLevels(levels []logrus.Level) {
 	hookLevel = levels
+}
+
+func SetLevelsAsDebug() {
+	hookLevel = log.LevelsDebug
+}
+
+func SetLevelsAsInfo() {
+	hookLevel = log.LevelsInfo
+}
+
+func SetLevelsAsWarn() {
+	hookLevel = log.LevelsWarn
+}
+
+func SetLevelsAsError() {
+	hookLevel = log.LevelsError
+}
+
+func SetLevelsAsPanic() {
+	hookLevel = log.LevelsPanic
 }
 
 func AddLevel(level logrus.Level) {
