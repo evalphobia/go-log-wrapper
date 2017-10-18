@@ -3,8 +3,8 @@ package sentry
 import (
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/evalphobia/logrus_sentry"
+	"github.com/sirupsen/logrus"
 
 	"github.com/evalphobia/go-log-wrapper/log"
 )

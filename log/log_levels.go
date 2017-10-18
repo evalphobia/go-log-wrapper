@@ -1,6 +1,6 @@
 package log
 
-import "github.com/Sirupsen/logrus"
+import "github.com/sirupsen/logrus"
 
 // log levels
 var (

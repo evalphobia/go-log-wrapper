@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,7 +22,7 @@ func TestPacketError(t *testing.T) {
 	output := buf.String()
 	assert.Contains(output, `level=error`)
 	assert.Contains(output, `msg="the title"`)
-	assert.Contains(output, `tag="my_tag"`)
+	assert.Contains(output, `tag=my_tag`)
 	assert.Contains(output, `value=999`)
 	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
@@ -42,7 +42,7 @@ func TestPacketInfo(t *testing.T) {
 	output := buf.String()
 	assert.Contains(output, `level=info`)
 	assert.Contains(output, `msg="the title"`)
-	assert.Contains(output, `tag="my_tag"`)
+	assert.Contains(output, `tag=my_tag`)
 	assert.Contains(output, `value=999`)
 	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
@@ -62,7 +62,7 @@ func TestPacketDebug(t *testing.T) {
 	output := buf.String()
 	assert.Contains(output, `level=debug`)
 	assert.Contains(output, `msg="the title"`)
-	assert.Contains(output, `tag="my_tag"`)
+	assert.Contains(output, `tag=my_tag`)
 	assert.Contains(output, `value=999`)
 	trace := GetTraces(0, 2)
 	assert.Contains(output, trace[0].Function)
@@ -104,7 +104,7 @@ func TestPacketNoTrace(t *testing.T) {
 	output := buf.String()
 	assert.Contains(output, `level=error`)
 	assert.Contains(output, `msg="the title"`)
-	assert.Contains(output, `tag="my_tag"`)
+	assert.Contains(output, `tag=my_tag`)
 	assert.Contains(output, `value=999`)
 	trace := GetTraces(0, 2)
 	assert.NotContains(output, trace[0].Function)

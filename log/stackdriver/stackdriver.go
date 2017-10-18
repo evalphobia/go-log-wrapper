@@ -1,9 +1,9 @@
 package stackdriver
 
 import (
-	"github.com/Sirupsen/logrus"
 	"github.com/evalphobia/google-api-go-wrapper/config"
 	"github.com/evalphobia/logrus_stackdriver"
+	"github.com/sirupsen/logrus"
 
 	"github.com/evalphobia/go-log-wrapper/log"
 )
