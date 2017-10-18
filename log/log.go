@@ -3,8 +3,8 @@ package log
 import (
 	"fmt"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/sirupsen/logrus"
 )
 
 // Nothing is dummy variable for import error

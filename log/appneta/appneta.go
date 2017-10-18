@@ -1,8 +1,8 @@
 package appneta
 
 import (
-	"github.com/Sirupsen/logrus"
 	"github.com/evalphobia/logrus_appneta"
+	"github.com/sirupsen/logrus"
 
 	"github.com/evalphobia/go-log-wrapper/log"
 )
