@@ -48,13 +48,13 @@ func Debug(v ...interface{}) {
 }
 
 // Dump prints dump variable in console
-func Dump(v interface{}) {
+func Dump(v ...interface{}) {
 	spew.Dump(v)
 }
 
 // Print prints variable information in console
 func Print(v interface{}) {
-	fmt.Printf("%#v\n", v)
+	fmt.Printf("%+v\n", v)
 }
 
 // Header prints separator in console
@@ -63,7 +63,7 @@ func Header(v ...interface{}) {
 		fmt.Printf("=============================================\n")
 		return
 	}
-	fmt.Printf("===================== %v =====================\n", v[0])
+	fmt.Printf("===================== %+v =====================\n", v[0])
 	return
 }
 
