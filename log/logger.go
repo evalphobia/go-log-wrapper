@@ -1,6 +1,9 @@
 package log
 
 import (
+	"io"
+	"io/ioutil"
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -16,9 +19,24 @@ func NewLogger() *Logger {
 	}
 }
 
+// SetOutput sets output writer.
+func (l *Logger) SetOutput(w io.Writer) {
+	l.Logger.Out = w
+}
+
+// DisableOutput disables output.
+func (l *Logger) DisableOutput() {
+	l.SetOutput(ioutil.Discard)
+}
+
+// SetFormatter sets Fomatter.
+func (l *Logger) SetFormatter(f logrus.Formatter) {
+	l.Logger.Formatter = f
+}
+
 // NewPacket creates Packet with Logger.
-func (p Logger) NewPacket() Packet {
+func (l *Logger) NewPacket() Packet {
 	return Packet{
-		Logger: p,
+		Logger: l,
 	}
 }

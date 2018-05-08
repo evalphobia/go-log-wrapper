@@ -10,6 +10,16 @@ import (
 // Nothing is dummy variable for import error
 var Nothing int
 
+// SetGlobalLogLevel sets log level.
+func SetGlobalLogLevel(l logrus.Level) {
+	logrus.SetLevel(l)
+}
+
+// SetGlobalFormatter sets Fomatter.
+func SetGlobalFormatter(f logrus.Formatter) {
+	logrus.SetFormatter(f)
+}
+
 func newLogField(v []interface{}) logrus.Fields {
 	f := logrus.Fields{}
 	f["trace"] = GetTraces(0, 3)
