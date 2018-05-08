@@ -10,6 +10,16 @@ import (
 // Nothing is dummy variable for import error
 var Nothing int
 
+// SetGlobalLogLevel sets log level.
+func SetGlobalLogLevel(l logrus.Level) {
+	logrus.SetLevel(l)
+}
+
+// SetGlobalFormatter sets Fomatter.
+func SetGlobalFormatter(f logrus.Formatter) {
+	logrus.SetFormatter(f)
+}
+
 func newLogField(v []interface{}) logrus.Fields {
 	f := logrus.Fields{}
 	f["trace"] = GetTraces(0, 3)
@@ -48,13 +58,13 @@ func Debug(v ...interface{}) {
 }
 
 // Dump prints dump variable in console
-func Dump(v interface{}) {
+func Dump(v ...interface{}) {
 	spew.Dump(v)
 }
 
 // Print prints variable information in console
 func Print(v interface{}) {
-	fmt.Printf("%#v\n", v)
+	fmt.Printf("%+v\n", v)
 }
 
 // Header prints separator in console
@@ -63,7 +73,7 @@ func Header(v ...interface{}) {
 		fmt.Printf("=============================================\n")
 		return
 	}
-	fmt.Printf("===================== %v =====================\n", v[0])
+	fmt.Printf("===================== %+v =====================\n", v[0])
 	return
 }
 

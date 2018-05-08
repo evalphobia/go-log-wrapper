@@ -14,6 +14,8 @@ const (
 
 // Packet is struct for log data
 type Packet struct {
+	*Logger
+
 	Title   string
 	Data    interface{}
 	Err     error
@@ -32,34 +34,64 @@ type Packet struct {
 	DataList []interface{}
 }
 
-// Fatal logs fatal error
+// SetLogger sets Logger.
+func (p *Packet) SetLogger(l *Logger) *Packet {
+	p.Logger = l
+	return p
+}
+
+// Fatal logs fatal-level log.
 func (p Packet) Fatal() {
-	logrus.WithFields(p.createField()).Fatal(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Fatal(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Fatal(p.Title)
 }
 
-// Panic logs fatal error
+// Panic logs panic-level log.
 func (p Packet) Panic() {
-	logrus.WithFields(p.createField()).Panic(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Panic(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Panic(p.Title)
 }
 
-// Error logs serious error
+// Error logs error-level log.
 func (p Packet) Error() {
-	logrus.WithFields(p.createField()).Error(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Error(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Error(p.Title)
 }
 
-// Warn logs warning
+// Warn logs warn-level log.
 func (p Packet) Warn() {
-	logrus.WithFields(p.createField()).Warn(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Warn(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Warn(p.Title)
 }
 
-// Info logs information
+// Info logs info-level log.
 func (p Packet) Info() {
-	logrus.WithFields(p.createField()).Info(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Info(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Info(p.Title)
 }
 
-// Debug logs development information
+// Debug logs debug-level log.
 func (p Packet) Debug() {
-	logrus.WithFields(p.createField()).Debug(p.Title)
+	if p.Logger == nil {
+		logrus.WithFields(p.createField()).Debug(p.Title)
+		return
+	}
+	p.Logger.WithFields(p.createField()).Debug(p.Title)
 }
 
 // AddData adds data for logging

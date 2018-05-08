@@ -31,6 +31,14 @@ go-log-wrapper
 
 simple logrus wrapper to use easily
 
+# Supported Hooks
+
+- Appneta TraceView
+- Fluent
+- Kinesis
+- Sentry
+- Stackdriver Logging
+
 # Quick Usage
 
 ## Print
@@ -113,5 +121,50 @@ func main(){
 	// AppNeta TraceView
 	appneta.AddLevel(logrus.WarnLevel)
 	appneta.Set()
+}
+```
+
+## Logger Instance
+
+```go
+package main
+
+import (
+	"github.com/evalphobia/go-log-wrapper/log"
+)
+
+var logger1 = log.NewLogger()
+var logger2 = log.NewLogger()
+
+
+func main() {
+	// global log level sets Error-level
+	log.SetGlobalLogLevel(log.Error)
+
+	// logger1 write log to file
+	file, _ := os.Create(`/path/to/file`)
+	logger1.SetOutput(file)
+	logger1.SetLogLevel(log.Debug)
+
+	// logger2 does not write to file, use Sentry hook
+	logger2.DisableOutput()
+	sentry.SetLogger(logger2, dsn)
+
+	// global logging
+	log.Packet{
+		Title: "Error by global level",
+	}.Error()
+
+	// use logger1
+	log.Packet{
+		Logger: logger1,
+		Title:  "Info by logger1",
+	}.Info()
+
+	// use logger2
+	log.Packet{
+		Logger: logger2,
+		Title:  "logger2 does not print, only hooks",
+	}.Error()
 }
 ```

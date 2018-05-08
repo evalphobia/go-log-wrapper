@@ -2,6 +2,15 @@ package log
 
 import "github.com/sirupsen/logrus"
 
+const (
+	LevelFatal = logrus.FatalLevel
+	LevelPanic = logrus.PanicLevel
+	LevelError = logrus.ErrorLevel
+	LevelWarn  = logrus.WarnLevel
+	LevelInfo  = logrus.InfoLevel
+	LevelDebug = logrus.DebugLevel
+)
+
 // log levels
 var (
 	LevelsPanic = []logrus.Level{
