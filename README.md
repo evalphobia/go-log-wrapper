@@ -1,8 +1,33 @@
 go-log-wrapper
-====
+----
 
-[![Build Status](https://travis-ci.org/evalphobia/go-log-wrapper.svg?branch=master)](https://travis-ci.org/evalphobia/go-log-wrapper) [![codecov](https://codecov.io/gh/evalphobia/go-log-wrapper/branch/master/graph/badge.svg)](https://codecov.io/gh/evalphobia/go-log-wrapper)
- [![GoDoc](https://godoc.org/github.com/evalphobia/go-log-wrapper?status.svg)](https://godoc.org/github.com/evalphobia/go-log-wrapper)
+[![GoDoc][1]][2] [![License: Apache 2.0][23]][24] [![Release][5]][6] [![Build Status][7]][8] [![Codecov Coverage][11]][12] [![Go Report Card][13]][14] [![Code Climate][19]][20] [![BCH compliance][21]][22]
+
+[1]: https://godoc.org/github.com/evalphobia/go-log-wrapper?status.svg
+[2]: https://godoc.org/github.com/evalphobia/go-log-wrapper
+[3]: https://img.shields.io/badge/License-MIT-blue.svg
+[4]: LICENSE.md
+[5]: https://img.shields.io/github/release/evalphobia/go-log-wrapper.svg
+[6]: https://github.com/evalphobia/go-log-wrapper/releases/latest
+[7]: https://travis-ci.org/evalphobia/go-log-wrapper.svg?branch=master
+[8]: https://travis-ci.org/evalphobia/go-log-wrapper
+[9]: https://coveralls.io/repos/evalphobia/go-log-wrapper/badge.svg?branch=master&service=github
+[10]: https://coveralls.io/github/evalphobia/go-log-wrapper?branch=master
+[11]: https://codecov.io/github/evalphobia/go-log-wrapper/coverage.svg?branch=master
+[12]: https://codecov.io/github/evalphobia/go-log-wrapper?branch=master
+[13]: https://goreportcard.com/badge/github.com/evalphobia/go-log-wrapper
+[14]: https://goreportcard.com/report/github.com/evalphobia/go-log-wrapper
+[15]: https://img.shields.io/github/downloads/evalphobia/go-log-wrapper/total.svg?maxAge=1800
+[16]: https://github.com/evalphobia/go-log-wrapper/releases
+[17]: https://img.shields.io/github/stars/evalphobia/go-log-wrapper.svg
+[18]: https://github.com/evalphobia/go-log-wrapper/stargazers
+[19]: https://codeclimate.com/github/evalphobia/go-log-wrapper/badges/gpa.svg
+[20]: https://codeclimate.com/github/evalphobia/go-log-wrapper
+[21]: https://bettercodehub.com/edge/badge/evalphobia/go-log-wrapper?branch=master
+[22]: https://bettercodehub.com/
+[23]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+[24]: LICENSE.md
+
 
 simple logrus wrapper to use easily
 
