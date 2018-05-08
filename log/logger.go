@@ -34,6 +34,11 @@ func (l *Logger) SetFormatter(f logrus.Formatter) {
 	l.Logger.Formatter = f
 }
 
+// SetLogLevel sets log level.
+func (l *Logger) SetLogLevel(lv logrus.Level) {
+	l.Logger.SetLevel(lv)
+}
+
 // NewPacket creates Packet with Logger.
 func (l *Logger) NewPacket() Packet {
 	return Packet{
