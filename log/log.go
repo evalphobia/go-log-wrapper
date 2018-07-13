@@ -1,6 +1,7 @@
 package log
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/davecgh/go-spew/spew"
@@ -60,6 +61,17 @@ func Debug(v ...interface{}) {
 // Dump prints dump variable in console
 func Dump(v ...interface{}) {
 	spew.Dump(v)
+}
+
+// Json prints data on json format in console
+func Json(v ...interface{}) {
+	for _, vv := range v {
+		byt, err := json.Marshal(vv)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		fmt.Println(string(byt))
+	}
 }
 
 // Print prints variable information in console
