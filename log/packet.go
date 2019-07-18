@@ -16,15 +16,16 @@ const (
 type Packet struct {
 	*Logger
 
-	Title   string
-	Data    interface{}
-	Err     error
-	Request *http.Request
-	Context context.Context
-	SQL     string
-	Engine  string
-	UserID  string
-	Tag     string
+	Severity string
+	Title    string
+	Data     interface{}
+	Err      error
+	Request  *http.Request
+	Context  context.Context
+	SQL      string
+	Engine   string
+	UserID   string
+	Tag      string
 
 	Trace     int // stacktrace depth
 	TraceSkip int
@@ -43,55 +44,55 @@ func (p *Packet) SetLogger(l *Logger) *Packet {
 // Fatal logs fatal-level log.
 func (p Packet) Fatal() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Fatal(p.Title)
+		logrus.WithFields(p.createField("fatal")).Fatal(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Fatal(p.Title)
+	p.Logger.WithFields(p.createField("fatal")).Fatal(p.Title)
 }
 
 // Panic logs panic-level log.
 func (p Packet) Panic() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Panic(p.Title)
+		logrus.WithFields(p.createField("panic")).Panic(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Panic(p.Title)
+	p.Logger.WithFields(p.createField("panic")).Panic(p.Title)
 }
 
 // Error logs error-level log.
 func (p Packet) Error() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Error(p.Title)
+		logrus.WithFields(p.createField("error")).Error(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Error(p.Title)
+	p.Logger.WithFields(p.createField("error")).Error(p.Title)
 }
 
 // Warn logs warn-level log.
 func (p Packet) Warn() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Warn(p.Title)
+		logrus.WithFields(p.createField("warn")).Warn(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Warn(p.Title)
+	p.Logger.WithFields(p.createField("warn")).Warn(p.Title)
 }
 
 // Info logs info-level log.
 func (p Packet) Info() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Info(p.Title)
+		logrus.WithFields(p.createField("info")).Info(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Info(p.Title)
+	p.Logger.WithFields(p.createField("info")).Info(p.Title)
 }
 
 // Debug logs debug-level log.
 func (p Packet) Debug() {
 	if p.Logger == nil {
-		logrus.WithFields(p.createField()).Debug(p.Title)
+		logrus.WithFields(p.createField("debug")).Debug(p.Title)
 		return
 	}
-	p.Logger.WithFields(p.createField()).Debug(p.Title)
+	p.Logger.WithFields(p.createField("debug")).Debug(p.Title)
 }
 
 // AddData adds data for logging
@@ -100,7 +101,7 @@ func (p *Packet) AddData(d ...interface{}) *Packet {
 	return p
 }
 
-func (p Packet) createField() logrus.Fields {
+func (p Packet) createField(severity string) logrus.Fields {
 	f := logrus.Fields{}
 
 	f["tag"] = p.Tag
@@ -120,6 +121,11 @@ func (p Packet) createField() logrus.Fields {
 	}
 	if p.UserID != "" {
 		f["user_id"] = p.UserID
+	}
+
+	f["severity"] = severity
+	if p.Severity != "" {
+		f["severity"] = p.Severity
 	}
 
 	if p.Err != nil {
